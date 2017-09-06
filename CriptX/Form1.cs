@@ -42,6 +42,8 @@ namespace CriptX
                 btn_Decriptar.Enabled = true;
                 radioButton_Texto.Enabled = true;
                 radioButton_Outro.Enabled = true;
+                menuStrip1.Enabled = true;
+                avançadoToolStripMenuItem.Enabled = true;
 
             }
         }
@@ -439,9 +441,11 @@ namespace CriptX
             //fileLines = File.ReadAllLines(filePath); // Le o arquivo e salva numa array
 
             CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + " - Encriptado" + Path.GetExtension(filePath); //Path do arquivo encriptado
-
-            if (radioButton_Outro.Checked)
+            
+            
+            if (!encriptarTextoToolStripMenuItem.Checked)
             {
+                byteLines = File.ReadAllBytes(filePath);
                 string palavraChave = textBox_PalavraChave.Text.ToUpper();
                 byteCript(palavraChave);
             }
@@ -457,6 +461,7 @@ namespace CriptX
 
                 File.WriteAllLines(CriptXPath, fileLinesEncriptado, Encoding.GetEncoding("iso-8859-1")); //Escreve no arquivo Encriptado
             }
+            
         }
         
         private void btn_Decriptar_Click(object sender, EventArgs e)
@@ -478,7 +483,7 @@ namespace CriptX
 
         private void radioButton_Texto_CheckedChanged(object sender, EventArgs e)
         {
-
+        /*
         if (radioButton_Texto.Checked)
             {
                 checkBox_Remontar.Checked = false;
@@ -521,10 +526,73 @@ namespace CriptX
 
                 btn_Decriptar.Enabled = false;
             }
+        */
         }
 
         private void checkBox_Remontar_CheckedChanged(object sender, EventArgs e)
         {
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void avançadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void encriptarTextoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (encriptarTextoToolStripMenuItem.Checked)
+            {
+                checkBox_Remontar.Checked = false;
+
+                textBox_PalavraChave.Enabled = true;
+
+                btn_Encriptar.Text = "Encriptar";
+
+                textBox_PalavraChave.Text = "";
+
+                label2.Text = "Palavra-Chave (Apenas letras, sem espaços)";
+
+                //textBox_PalavraChave.Width = 179;
+
+                btn_Encriptar.Location = new Point(61, 89);
+
+                checkBox_Remontar.Hide();
+
+                btn_Decriptar.Show();
+
+                this.BackColor = Color.FromArgb(192, 192, 225);
+
+                btn_Decriptar.Text = "Decriptar";
+
+                btn_Decriptar.Enabled = true;
+            }
+            else
+            {
+                label2.Text = "Senha (Apenas números, sem espaços)";
+
+                this.BackColor =  Color.FromArgb(224,224,224);
+
+                btn_Encriptar.Location = new Point(107, 89);
+
+                textBox_PalavraChave.Text = "";
+
+                //textBox_PalavraChave.Width = 124;
+
+                checkBox_Remontar.Show();
+
+                btn_Encriptar.Text = "OK";
+
+                btn_Decriptar.Hide();
+
+                btn_Decriptar.Text = "...";
+
+                btn_Decriptar.Enabled = false;
+            }
         }
     }
 }

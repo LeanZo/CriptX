@@ -8,3 +8,13 @@ C:\Users\kashc\Documents\Visual Studio 2017\Projects\CriptX\CriptX\obj\Debug\Cri
 C:\Users\kashc\Documents\Visual Studio 2017\Projects\CriptX\CriptX\obj\Debug\CriptX.csproj.CoreCompileInputs.cache
 C:\Users\kashc\Documents\Visual Studio 2017\Projects\CriptX\CriptX\obj\Debug\CriptX.exe
 C:\Users\kashc\Documents\Visual Studio 2017\Projects\CriptX\CriptX\obj\Debug\CriptX.pdb
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\bin\Debug\CriptX.exe.config
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\bin\Debug\CriptX.exe
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\bin\Debug\CriptX.pdb
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Debug\CriptX.csprojResolveAssemblyReference.cache
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Debug\CriptX.Form1.resources
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Debug\CriptX.Properties.Resources.resources
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Debug\CriptX.csproj.GenerateResource.Cache
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Debug\CriptX.csproj.CoreCompileInputs.cache
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Debug\CriptX.exe
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Debug\CriptX.pdb

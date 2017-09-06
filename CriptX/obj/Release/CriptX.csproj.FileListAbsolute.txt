@@ -10,3 +10,13 @@ C:\Users\kashc\Documents\Visual Studio 2017\Projects\CriptX\CriptX\obj\Release\C
 C:\Users\kashc\Documents\Visual Studio 2017\Projects\CriptX\CriptX\obj\Release\CriptX.csprojResolveAssemblyReference.cache
 C:\Users\kashc\Documents\Visual Studio 2017\Projects\CriptX\CriptX\bin\Release\CriptX.exe.CodeAnalysisLog.xml
 C:\Users\kashc\Documents\Visual Studio 2017\Projects\CriptX\CriptX\bin\Release\CriptX.exe.lastcodeanalysissucceeded
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\bin\Release\CriptX.exe.config
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\bin\Release\CriptX.exe
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\bin\Release\CriptX.pdb
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.csprojResolveAssemblyReference.cache
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.Form1.resources
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.Properties.Resources.resources
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.csproj.GenerateResource.Cache
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.csproj.CoreCompileInputs.cache
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.exe
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.pdb
