@@ -149,6 +149,7 @@
             // checkBox_Remontar
             // 
             this.checkBox_Remontar.AutoSize = true;
+            this.checkBox_Remontar.Enabled = false;
             this.checkBox_Remontar.Location = new System.Drawing.Point(211, 93);
             this.checkBox_Remontar.Name = "checkBox_Remontar";
             this.checkBox_Remontar.Size = new System.Drawing.Size(69, 17);
@@ -167,7 +168,7 @@
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.menuStrip1.Size = new System.Drawing.Size(128, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(36, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -188,7 +189,7 @@
             // 
             this.encriptarTextoToolStripMenuItem.CheckOnClick = true;
             this.encriptarTextoToolStripMenuItem.Name = "encriptarTextoToolStripMenuItem";
-            this.encriptarTextoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.encriptarTextoToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.encriptarTextoToolStripMenuItem.Text = "Encriptar texto";
             this.encriptarTextoToolStripMenuItem.Click += new System.EventHandler(this.encriptarTextoToolStripMenuItem_Click);
             // 
@@ -213,7 +214,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CriptX";
+            this.Text = "CriptX v4.1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

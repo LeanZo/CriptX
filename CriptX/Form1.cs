@@ -44,6 +44,7 @@ namespace CriptX
                 radioButton_Outro.Enabled = true;
                 menuStrip1.Enabled = true;
                 avançadoToolStripMenuItem.Enabled = true;
+                checkBox_Remontar.Enabled = true;
 
             }
         }
@@ -332,7 +333,7 @@ namespace CriptX
 
                 //---------------------
                 CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + " - Encriptado" + Path.GetExtension(filePath); //Path do arquivo encriptado
-
+                CriptXPath = CriptXPath.Replace(" - Decriptado", "");
                 File.WriteAllLines(CriptXPath, Array.ConvertAll(fileLinesEncriptado, Convert.ToString));
                 //----------------------
             } else
@@ -409,12 +410,12 @@ namespace CriptX
 
                 //---------------------
 
-                CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + " - Decriptado" + Path.GetExtension(filePath); //Path do arquivo encriptado
-
+                CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + Path.GetExtension(filePath); //Path do arquivo encriptado
+                CriptXPath = CriptXPath.Replace(" - Encriptado", " - Decriptado");
                 File.WriteAllBytes(CriptXPath, Array.ConvertAll(fileLinesDecriptado, Convert.ToByte));
                 //--------------------
             }
-            MessageBox.Show("Feito");
+            MessageBox.Show("Concluído!");
 
         }
 
@@ -441,46 +442,106 @@ namespace CriptX
             //fileLines = File.ReadAllLines(filePath); // Le o arquivo e salva numa array
 
             CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + " - Encriptado" + Path.GetExtension(filePath); //Path do arquivo encriptado
-            
-            
+            CriptXPath = CriptXPath.Replace(" - Decriptado", "");
             if (!encriptarTextoToolStripMenuItem.Checked)
             {
-                byteLines = File.ReadAllBytes(filePath);
-                string palavraChave = textBox_PalavraChave.Text.ToUpper();
-                byteCript(palavraChave);
+                try {
+                    byteLines = File.ReadAllBytes(filePath);
+                    string palavraChave = textBox_PalavraChave.Text.ToUpper();
+                    if (String.IsNullOrEmpty(palavraChave) || String.IsNullOrWhiteSpace(palavraChave))
+                    {
+                        throw new ArgumentNullException("palavraChave", "Senha Vazia");
+                    }
+                    byteCript(palavraChave);
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    MessageBox.Show("ERRO: Arquivo não encontrado.");
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("ERRO: O Arquivo possui mais de 2GB.");
+                }
+                catch (ArgumentNullException)
+                {
+                    MessageBox.Show("ERRO: Insira uma Senha.");
+                }
+                catch (System.FormatException)
+                {
+                    MessageBox.Show("ERRO: Não é possivel decriptar um arquivo já decriptado.");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("ERRO: A Senha deve ser composta apenas de números.");
+                }
             }
             else
             {
-                string palavraChave = textBox_PalavraChave.Text.ToUpper();
+                try {
+                    string palavraChave = textBox_PalavraChave.Text.ToUpper();
 
-                fileLines = File.ReadAllLines(filePath, Encoding.GetEncoding("iso-8859-1"));// Le o arquivo e salva numa array, porem usando um encoding que possibilita ler caracteres especiais
+                    if (String.IsNullOrEmpty(palavraChave) || String.IsNullOrWhiteSpace(palavraChave))
+                    {
+                        throw new ArgumentNullException("palavraChave", "Palavra-Chave Vazia");
+                    }
 
-                string[] fileLinesEncriptado = encriptar(fileLines, palavraChave);
+                    fileLines = File.ReadAllLines(filePath, Encoding.GetEncoding("iso-8859-1"));// Le o arquivo e salva numa array, porem usando um encoding que possibilita ler caracteres especiais
 
-                File.Create(CriptXPath).Close();//Cria o arquivo Encriptado
+                    string[] fileLinesEncriptado = encriptar(fileLines, palavraChave);
 
-                File.WriteAllLines(CriptXPath, fileLinesEncriptado, Encoding.GetEncoding("iso-8859-1")); //Escreve no arquivo Encriptado
-            }
-            
+                    File.Create(CriptXPath).Close();//Cria o arquivo Encriptado
+
+                    File.WriteAllLines(CriptXPath, fileLinesEncriptado, Encoding.GetEncoding("iso-8859-1")); //Escreve no arquivo Encriptado
+
+                    MessageBox.Show("Concluído!");
+                } catch (System.IO.FileNotFoundException)
+                {
+                    MessageBox.Show("ERRO: Arquivo não encontrado.");
+                } catch (ArgumentNullException)
+                {
+                    MessageBox.Show("ERRO: Insira uma Palavra-Chave.");
+                } catch (Exception)
+                {
+                    MessageBox.Show("ERRO: Palavra-Chave deve ser composta apenas de letras.");
+                }
+            }            
         }
-        
+
         private void btn_Decriptar_Click(object sender, EventArgs e)
         {
-            CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + " - Decriptado" + Path.GetExtension(filePath); //Path do arquivo encriptado
-
+            CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + Path.GetExtension(filePath); //Path do arquivo encriptado
+            CriptXPath = CriptXPath.Replace(" - Encriptado", " - Decriptado");
             //fileLines = File.ReadAllLines(filePath); // Le o arquivo e salva numa array
+            try {
+                string palavraChave = textBox_PalavraChave.Text.ToUpper();
 
-            string palavraChave = textBox_PalavraChave.Text.ToUpper();
+                if (String.IsNullOrEmpty(palavraChave) || String.IsNullOrWhiteSpace(palavraChave))
+                {
+                    throw new ArgumentNullException("palavraChave", "Palavra-Chave Vazia");
+                }
 
-            fileLines = File.ReadAllLines(filePath, Encoding.GetEncoding("iso-8859-1")); // Le o arquivo e salva numa array, porem usando um encoding que possibilita ler caracteres especiais
+                fileLines = File.ReadAllLines(filePath, Encoding.GetEncoding("iso-8859-1")); // Le o arquivo e salva numa array, porem usando um encoding que possibilita ler caracteres especiais
 
-            string[] fileLinesDecriptado = decriptar(fileLines, palavraChave);
+                string[] fileLinesDecriptado = decriptar(fileLines, palavraChave);
 
-            File.Create(CriptXPath).Close();//Cria o arquivo Decriptado
-               
-            File.WriteAllLines(CriptXPath, fileLinesDecriptado, Encoding.GetEncoding("iso-8859-1")); //Escreve no arquivo Decriptado
+                File.Create(CriptXPath).Close();//Cria o arquivo Decriptado
+
+                File.WriteAllLines(CriptXPath, fileLinesDecriptado, Encoding.GetEncoding("iso-8859-1")); //Escreve no arquivo Decriptado
+
+                MessageBox.Show("Concluído!");
+            }
+                                
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("ERRO: Arquivo não encontrado.");
+            } catch (ArgumentNullException)
+            {
+                  MessageBox.Show("ERRO: Insira uma Palavra-Chave.");
+            } catch (Exception)
+            {
+                MessageBox.Show("ERRO: Palavra-Chave deve ser composta apenas de letras.");
+            }
         }
-
         private void radioButton_Texto_CheckedChanged(object sender, EventArgs e)
         {
         /*
