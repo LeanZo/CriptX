@@ -19,3 +19,4 @@ C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.csproj.Generate
 C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.csproj.CoreCompileInputs.cache
 C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.exe
 C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.pdb
+C:\Users\kashc\Documents\GitHub\CriptX\CriptX\obj\Release\CriptX.csprojResolveAssemblyReference.cache

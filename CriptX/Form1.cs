@@ -45,7 +45,11 @@ namespace CriptX
                 menuStrip1.Enabled = true;
                 avançadoToolStripMenuItem.Enabled = true;
                 checkBox_Remontar.Enabled = true;
-
+                Int64 fileSizeInBytes = new FileInfo(filePath).Length;
+                if (fileSizeInBytes > 5242880)
+                {
+                    MessageBox.Show("AVISO: O arquivo tem mais de 5MB.\nTentar encriptar/decriptar este arquivo pode levar tempo.");
+                }
             }
         }
 
@@ -332,8 +336,8 @@ namespace CriptX
                 Array.Reverse(fileLinesEncriptado);
 
                 //---------------------
-                CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + " - Encriptado" + Path.GetExtension(filePath); //Path do arquivo encriptado
-                CriptXPath = CriptXPath.Replace(" - Decriptado", "");
+                CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + Path.GetExtension(filePath); //Path do arquivo encriptado
+              //  CriptXPath = CriptXPath.Replace(" - Decriptado", "");
                 File.WriteAllLines(CriptXPath, Array.ConvertAll(fileLinesEncriptado, Convert.ToString));
                 //----------------------
             } else
@@ -411,7 +415,7 @@ namespace CriptX
                 //---------------------
 
                 CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + Path.GetExtension(filePath); //Path do arquivo encriptado
-                CriptXPath = CriptXPath.Replace(" - Encriptado", " - Decriptado");
+               // CriptXPath = CriptXPath.Replace(" - Encriptado", " - Decriptado");
                 File.WriteAllBytes(CriptXPath, Array.ConvertAll(fileLinesDecriptado, Convert.ToByte));
                 //--------------------
             }
@@ -441,18 +445,31 @@ namespace CriptX
 
             //fileLines = File.ReadAllLines(filePath); // Le o arquivo e salva numa array
 
-            CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + " - Encriptado" + Path.GetExtension(filePath); //Path do arquivo encriptado
-            CriptXPath = CriptXPath.Replace(" - Decriptado", "");
+            CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + Path.GetExtension(filePath); //Path do arquivo encriptado
+           // CriptXPath = CriptXPath.Replace(" - Decriptado", "");
             if (!encriptarTextoToolStripMenuItem.Checked)
             {
                 try {
                     byteLines = File.ReadAllBytes(filePath);
                     string palavraChave = textBox_PalavraChave.Text.ToUpper();
+
+                    try
+                    {
+                        Convert.ToInt32(palavraChave);
+                    }catch(System.FormatException)
+                    {
+                        throw new ArgumentException();
+                    }
+
                     if (String.IsNullOrEmpty(palavraChave) || String.IsNullOrWhiteSpace(palavraChave))
                     {
                         throw new ArgumentNullException("palavraChave", "Senha Vazia");
                     }
                     byteCript(palavraChave);
+                }
+                catch (System.OutOfMemoryException)
+                {
+                    MessageBox.Show("ERRO: Arquivo muito grande. Sistema sem memória.");
                 }
                 catch (System.IO.FileNotFoundException)
                 {
@@ -466,14 +483,22 @@ namespace CriptX
                 {
                     MessageBox.Show("ERRO: Insira uma Senha.");
                 }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("ERRO: A Senha deve ser composta apenas de números.");
+                }
                 catch (System.FormatException)
                 {
                     MessageBox.Show("ERRO: Não é possivel decriptar um arquivo já decriptado.");
                 }
-                catch (Exception)
+                catch (System.OverflowException)
                 {
-                    MessageBox.Show("ERRO: A Senha deve ser composta apenas de números.");
+                    MessageBox.Show("ERRO: Senha incorreta.");
                 }
+              //  catch (Exception)
+              //  {
+              //      MessageBox.Show("ERRO: A Senha deve ser composta apenas de números.");
+               // }
             }
             else
             {
@@ -510,7 +535,7 @@ namespace CriptX
         private void btn_Decriptar_Click(object sender, EventArgs e)
         {
             CriptXPath = fileFolder + @"\" + Path.GetFileNameWithoutExtension(filePath) + Path.GetExtension(filePath); //Path do arquivo encriptado
-            CriptXPath = CriptXPath.Replace(" - Encriptado", " - Decriptado");
+            //CriptXPath = CriptXPath.Replace(" - Encriptado", " - Decriptado");
             //fileLines = File.ReadAllLines(filePath); // Le o arquivo e salva numa array
             try {
                 string palavraChave = textBox_PalavraChave.Text.ToUpper();
@@ -542,6 +567,7 @@ namespace CriptX
                 MessageBox.Show("ERRO: Palavra-Chave deve ser composta apenas de letras.");
             }
         }
+
         private void radioButton_Texto_CheckedChanged(object sender, EventArgs e)
         {
         /*
@@ -656,4 +682,9 @@ namespace CriptX
             }
         }
     }
+    /*
+         <runtime>
+        <gcAllowVeryLargeObjects enabled="true" />    
+    </runtime>
+     */
 }
